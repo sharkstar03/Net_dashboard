@@ -1,0 +1,145 @@
+{% extends "base.html" %}
+
+{% block title %}Configuración{% endblock %}
+
+{% block content %}
+<div class="row justify-content-center">
+    <div class="col-md-8">
+        <div class="card glass-card">
+            <div class="card-header border-0 pb-0">
+                <h4 class="card-title"><i class="fa-solid fa-gear me-2 text-primary-accent"></i>Configuración</h4>
+            </div>
+            <div class="card-body">
+                <form id="settingsForm">
+                    <!-- Apariencia -->
+                    <h5 class="mb-3 text-muted border-bottom pb-2">Apariencia</h5>
+                    <div class="mb-4">
+                        <label class="form-label d-block">Tema</label>
+                        <div class="btn-group w-100" role="group">
+                            <input type="radio" class="btn-check" name="theme" id="themeLight" value="light" {% if user.settings.theme == 'light' %}checked{% endif %}>
+                            <label class="btn btn-outline-primary" for="themeLight"><i class="fa-solid fa-sun me-2"></i>Claro</label>
+
+                            <input type="radio" class="btn-check" name="theme" id="themeDark" value="dark" {% if user.settings.theme == 'dark' %}checked{% endif %}>
+                            <label class="btn btn-outline-primary" for="themeDark"><i class="fa-solid fa-moon me-2"></i>Oscuro</label>
+
+                            <input type="radio" class="btn-check" name="theme" id="themeSystem" value="system" {% if user.settings.theme == 'system' %}checked{% endif %}>
+                            <label class="btn btn-outline-primary" for="themeSystem"><i class="fa-solid fa-desktop me-2"></i>Sistema</label>
+                        </div>
+                    </div>
+
+                    <!-- Privacidad -->
+                    <h5 class="mb-3 text-muted border-bottom pb-2">Privacidad & Seguridad</h5>
+                    <div class="mb-4">
+                        <div class="form-check form-switch">
+                            <input class="form-check-input" type="checkbox" id="showIp" {% if user.settings.show_public_ip %}checked{% endif %}>
+                            <label class="form-check-label" for="showIp">Mostrar IP Pública en Dashboard</label>
+                            <div class="form-text text-muted">Si está desactivado, la IP se mostrará como ***.***.***.***</div>
+                        </div>
+                    </div>
+
+                    <!-- Notificaciones -->
+                    <h5 class="mb-3 text-muted border-bottom pb-2">Notificaciones</h5>
+                    <div class="mb-3">
+                        <div class="form-check form-switch mb-3">
+                            <input class="form-check-input" type="checkbox" id="notifEnabled" {% if user.settings.notifications_enabled %}checked{% endif %}>
+                            <label class="form-check-label" for="notifEnabled">Activar Alertas</label>
+                        </div>
+                    </div>
+
+                    <h6 class="text-primary-accent mb-3"><i class="fa-brands fa-telegram me-2"></i>Telegram</h6>
+                    <div class="mb-3">
+                        <label for="botToken" class="form-label">Bot Token</label>
+                        <input type="password" class="form-control" id="botToken" value="{{ user.settings.telegram_bot_token or '' }}" placeholder="123456789:ABCdef...">
+                        <div class="form-text">El token que te da @BotFather</div>
+                    </div>
+                    <div class="mb-4">
+                        <label for="chatId" class="form-label">Chat ID</label>
+                        <input type="text" class="form-control" id="chatId" value="{{ user.settings.telegram_chat_id or '' }}" placeholder="123456789">
+                        <div class="form-text">Tu ID de usuario o ID de grupo.</div>
+                    </div>
+
+                    <h6 class="text-primary-accent mb-3"><i class="fa-brands fa-whatsapp me-2"></i>WhatsApp (CallMeBot)</h6>
+                    <div class="mb-3">
+                        <label for="whatsappPhone" class="form-label">Número de Teléfono</label>
+                        <input type="text" class="form-control" id="whatsappPhone" value="{{ user.settings.whatsapp_phone or '' }}" placeholder="+34 123 456 789">
+                        <div class="form-text">Incluye el código de país (ej. +34 para España).</div>
+                    </div>
+                    <div class="mb-4">
+                        <label for="whatsappApikey" class="form-label">API Key</label>
+                        <input type="password" class="form-control" id="whatsappApikey" value="{{ user.settings.whatsapp_apikey or '' }}" placeholder="123456">
+                        <div class="form-text">Obtén tu API Key enviando "I allow callmebot to send me messages" al +34 123 456 789 (Número de CallMeBot).</div>
+                    </div>
+
+                    <div class="d-grid gap-2 d-md-flex justify-content-md-end">
+                        <a href="{{ url_for('main.dashboard') }}" class="btn btn-outline-secondary">Cancelar</a>
+                        <button type="submit" class="btn btn-primary"><i class="fa-solid fa-save me-2"></i>Guardar Cambios</button>
+                    </div>
+                </form>
+            </div>
+        </div>
+    </div>
+</div>
+
+<!-- Toast Container for Save Confirmation -->
+<div class="toast-container position-fixed bottom-0 end-0 p-3">
+    <div id="saveToast" class="toast align-items-center text-bg-success border-0" role="alert" aria-live="assertive" aria-atomic="true">
+        <div class="d-flex">
+            <div class="toast-body">
+                <i class="fa-solid fa-check-circle me-2"></i> Configuración guardada correctamente.
+            </div>
+            <button type="button" class="btn-close btn-close-white me-2 m-auto" data-bs-dismiss="toast" aria-label="Close"></button>
+        </div>
+    </div>
+</div>
+{% endblock %}
+
+{% block scripts %}
+<script>
+document.getElementById('settingsForm').addEventListener('submit', function(e) {
+    e.preventDefault();
+    
+    const theme = document.querySelector('input[name="theme"]:checked').value;
+    const showIp = document.getElementById('showIp').checked;
+    const notifEnabled = document.getElementById('notifEnabled').checked;
+    const botToken = document.getElementById('botToken').value;
+    const chatId = document.getElementById('chatId').value;
+    const whatsappPhone = document.getElementById('whatsappPhone').value;
+    const whatsappApikey = document.getElementById('whatsappApikey').value;
+
+    fetch('/api/settings', {
+        method: 'POST',
+        headers: { 'Content-Type': 'application/json' },
+        body: JSON.stringify({
+            theme: theme,
+            show_public_ip: showIp,
+            notifications_enabled: notifEnabled,
+            telegram_bot_token: botToken,
+            telegram_chat_id: chatId,
+            whatsapp_phone: whatsappPhone,
+            whatsapp_apikey: whatsappApikey
+        })
+    })
+    .then(response => response.json())
+    .then(data => {
+        if (data.status === 'success') {
+            // Immediate visual update
+            if (theme === 'system') {
+                // Simple check for system preference
+                if (window.matchMedia && window.matchMedia('(prefers-color-scheme: dark)').matches) {
+                    document.documentElement.setAttribute('data-bs-theme', 'dark');
+                } else {
+                    document.documentElement.setAttribute('data-bs-theme', 'light');
+                }
+            } else {
+                document.documentElement.setAttribute('data-bs-theme', theme);
+            }
+            
+            const toast = new bootstrap.Toast(document.getElementById('saveToast'));
+            toast.show();
+        } else {
+            alert('Error al guardar: ' + data.message);
+        }
+    });
+});
+</script>
+{% endblock %}

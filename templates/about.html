@@ -1,0 +1,61 @@
+{% extends "base.html" %}
+
+{% block title %}Acerca de{% endblock %}
+
+{% block content %}
+<div class="row justify-content-center">
+    <div class="col-md-8 text-center">
+        <div class="card glass-card p-5">
+            <div class="mb-4">
+                <i class="fa-solid fa-network-wired text-primary-accent display-1"></i>
+            </div>
+            <h1 class="display-4 fw-bold mb-3">Net<span class="text-primary-accent">Dashboard</span></h1>
+            <p class="lead text-muted mb-4">Sistema de Monitoreo de Red y Métricas Avanzadas</p>
+            
+            <div class="glass-badge fs-6 mb-4 px-3 py-2">
+                Versión 1.0.0
+            </div>
+
+            <p class="mb-5">
+                Este proyecto fue desarrollado para demostrar capacidades avanzadas en monitoreo de infraestructura,
+                visualización de datos en tiempo real y gestión de redes. Diseñado para entornos internos con
+                un enfoque en la usabilidad y la estética moderna.
+            </p>
+
+            <div class="row g-4 justify-content-center mb-5">
+                <div class="col-auto">
+                    <div class="d-flex align-items-center gap-2 text-muted">
+                        <i class="fa-brands fa-python fa-2x"></i>
+                        <span>Python / Flask</span>
+                    </div>
+                </div>
+                <div class="col-auto">
+                    <div class="d-flex align-items-center gap-2 text-muted">
+                        <i class="fa-brands fa-bootstrap fa-2x"></i>
+                        <span>Bootstrap 5</span>
+                    </div>
+                </div>
+                <div class="col-auto">
+                    <div class="d-flex align-items-center gap-2 text-muted">
+                        <i class="fa-solid fa-chart-line fa-2x"></i>
+                        <span>Chart.js</span>
+                    </div>
+                </div>
+            </div>
+
+            <hr class="border-secondary my-4">
+
+            <div class="text-muted">
+                <small>Desarrollado por</small>
+                <h5 class="mt-1">QUANTIUM CREW</h5>
+            </div>
+            
+            <div class="mt-4">
+                <a href="{{ url_for('main.dashboard') }}" class="btn btn-outline-primary rounded-pill px-4">
+                    <i class="fa-solid fa-arrow-left me-2"></i>Volver al Dashboard
+                </a>
+            </div>
+        </div>
+    </div>
+</div>
+{% endblock %}

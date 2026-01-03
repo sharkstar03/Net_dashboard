@@ -1,0 +1,41 @@
+{% extends "base.html" %}
+
+{% block title %}Login{% endblock %}
+
+{% block content %}
+<div class="row justify-content-center">
+    <div class="col-md-5 col-lg-4">
+        <div class="card auth-card">
+            <div class="card-header text-center border-0 pb-0">
+                <h3 class="mt-2"><i class="fa-solid fa-shield-halved text-primary-accent me-2"></i>Acceso</h3>
+            </div>
+            <div class="card-body">
+                <form method="POST">
+                    <div class="mb-3">
+                        <label for="username" class="form-label text-secondary">Usuario</label>
+                        <div class="input-group">
+                            <span class="input-group-text border-end-0"><i class="fa-solid fa-user"></i></span>
+                            <input type="text" class="form-control border-start-0 ps-0" id="username" name="username" placeholder="Ingresa tu usuario" required>
+                        </div>
+                    </div>
+                    <div class="mb-4">
+                        <label for="password" class="form-label text-secondary">Contraseña</label>
+                        <div class="input-group">
+                            <span class="input-group-text border-end-0"><i class="fa-solid fa-lock"></i></span>
+                            <input type="password" class="form-control border-start-0 ps-0" id="password" name="password" placeholder="••••••••" required>
+                        </div>
+                    </div>
+                    <button type="submit" class="btn btn-primary w-100 mb-3 shadow-sm">
+                        Entrar <i class="fa-solid fa-arrow-right ms-2"></i>
+                    </button>
+                </form>
+                <div class="text-center mt-3 pt-3 border-top border-secondary border-opacity-25">
+                    <a href="{{ url_for('main.register') }}" class="text-decoration-none text-info small">
+                        ¿No tienes cuenta? <span class="fw-bold">Regístrate aquí</span>
+                    </a>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+{% endblock %}

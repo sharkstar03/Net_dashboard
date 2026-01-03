@@ -1,0 +1,41 @@
+{% extends "base.html" %}
+
+{% block title %}Registro{% endblock %}
+
+{% block content %}
+<div class="row justify-content-center">
+    <div class="col-md-5 col-lg-4">
+        <div class="card auth-card">
+            <div class="card-header text-center border-0 pb-0">
+                <h3 class="mt-2"><i class="fa-solid fa-user-plus text-primary-accent me-2"></i>Nueva Cuenta</h3>
+            </div>
+            <div class="card-body">
+                <form method="POST">
+                    <div class="mb-3">
+                        <label for="username" class="form-label text-secondary">Usuario</label>
+                        <div class="input-group">
+                            <span class="input-group-text border-end-0"><i class="fa-solid fa-user"></i></span>
+                            <input type="text" class="form-control border-start-0 ps-0" id="username" name="username" placeholder="Elige un usuario" required>
+                        </div>
+                    </div>
+                    <div class="mb-4">
+                        <label for="password" class="form-label text-secondary">Contraseña</label>
+                        <div class="input-group">
+                            <span class="input-group-text border-end-0"><i class="fa-solid fa-lock"></i></span>
+                            <input type="password" class="form-control border-start-0 ps-0" id="password" name="password" placeholder="Crea una contraseña segura" required>
+                        </div>
+                    </div>
+                    <button type="submit" class="btn btn-success w-100 mb-3 shadow-sm" style="background: linear-gradient(45deg, #10b981, #059669); border: none;">
+                        Registrarse <i class="fa-solid fa-check ms-2"></i>
+                    </button>
+                </form>
+                <div class="text-center mt-3 pt-3 border-top border-secondary border-opacity-25">
+                    <a href="{{ url_for('main.login') }}" class="text-decoration-none text-info small">
+                        ¿Ya tienes cuenta? <span class="fw-bold">Inicia sesión</span>
+                    </a>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+{% endblock %}

@@ -1,0 +1,253 @@
+:root {
+    /* DEFAULT (DARK MODE) VARIABLES */
+    --bg-body: #0f172a;
+    --bg-card: rgba(30, 41, 59, 0.7);
+    --text-primary: #f1f5f9;
+    --text-secondary: #94a3b8;
+    --accent-primary: #0ea5e9; /* Sky Blue */
+    --accent-secondary: #8b5cf6; /* Violet */
+    --accent-success: #10b981;
+    --accent-danger: #ef4444;
+    --glass-border: 1px solid rgba(255, 255, 255, 0.1);
+    --glass-shadow: 0 8px 32px 0 rgba(0, 0, 0, 0.37);
+    --input-bg: rgba(15, 23, 42, 0.6);
+    --dropdown-bg: rgba(15, 23, 42, 0.95);
+    --bg-gradient: radial-gradient(at 0% 0%, hsla(253,16%,7%,1) 0, transparent 50%), 
+                   radial-gradient(at 50% 0%, hsla(225,39%,30%,1) 0, transparent 50%), 
+                   radial-gradient(at 100% 0%, hsla(339,49%,30%,1) 0, transparent 50%);
+}
+
+[data-bs-theme="light"] {
+    /* LIGHT MODE OVERRIDES */
+    --bg-body: #f1f5f9;
+    --bg-card: rgba(255, 255, 255, 0.85);
+    --text-primary: #1e293b;
+    --text-secondary: #64748b;
+    --accent-primary: #0284c7;
+    --accent-secondary: #7c3aed;
+    --glass-border: 1px solid rgba(0, 0, 0, 0.1);
+    --glass-shadow: 0 4px 20px 0 rgba(0, 0, 0, 0.1);
+    --input-bg: rgba(255, 255, 255, 0.9);
+    --dropdown-bg: rgba(255, 255, 255, 0.95);
+    --bg-gradient: linear-gradient(135deg, #f5f7fa 0%, #c3cfe2 100%);
+}
+
+body {
+    background-color: var(--bg-body);
+    color: var(--text-primary);
+    font-family: 'Inter', sans-serif;
+    min-height: 100vh;
+    background-image: var(--bg-gradient);
+    background-attachment: fixed;
+    transition: background-color 0.5s ease, color 0.5s ease, background-image 0.5s ease;
+}
+
+h1, h2, h3, h4, h5, h6, .navbar-brand {
+    font-family: 'Rajdhani', sans-serif;
+    text-transform: uppercase;
+    letter-spacing: 1px;
+    color: var(--text-primary);
+    transition: color 0.5s ease;
+}
+
+.text-primary-accent {
+    color: var(--accent-primary) !important;
+    transition: color 0.5s ease;
+}
+
+/* Glassmorphism Components */
+.glass-nav {
+    background: var(--bg-card);
+    backdrop-filter: blur(10px);
+    border-bottom: var(--glass-border);
+    transition: background 0.5s ease, border-color 0.5s ease;
+}
+
+.card {
+    background: var(--bg-card);
+    backdrop-filter: blur(8px);
+    border: var(--glass-border);
+    box-shadow: var(--glass-shadow);
+    border-radius: 16px;
+    transition: transform 0.3s ease, box-shadow 0.3s ease, background 0.5s ease, border-color 0.5s ease;
+}
+
+.card:hover {
+    transform: translateY(-5px);
+    box-shadow: 0 12px 40px 0 rgba(14, 165, 233, 0.15);
+    border-color: var(--accent-primary);
+}
+
+.card-header {
+    background: transparent;
+    border-bottom: var(--glass-border);
+    font-weight: 600;
+    font-size: 1.1rem;
+    color: var(--accent-primary);
+    padding: 1rem 1.5rem;
+    transition: border-color 0.5s ease, color 0.5s ease;
+}
+
+.card-body {
+    padding: 1.5rem;
+}
+
+/* Custom Inputs */
+.form-control, .form-select {
+    background: var(--input-bg);
+    border: var(--glass-border);
+    color: var(--text-primary);
+    border-radius: 8px;
+    padding: 10px 15px;
+    transition: background 0.3s ease, border-color 0.3s ease, color 0.3s ease, box-shadow 0.3s ease;
+}
+
+.form-control:focus, .form-select:focus {
+    background: var(--input-bg);
+    border-color: var(--accent-primary);
+    box-shadow: 0 0 0 0.25rem rgba(14, 165, 233, 0.25);
+    color: var(--text-primary);
+}
+
+.input-group-text {
+    background: var(--input-bg);
+    border: var(--glass-border);
+    color: var(--text-secondary);
+    transition: background 0.3s ease, border-color 0.3s ease, color 0.3s ease;
+}
+
+/* Buttons */
+.btn-primary {
+    background: linear-gradient(45deg, var(--accent-primary), var(--accent-secondary));
+    border: none;
+    border-radius: 8px;
+    padding: 10px 20px;
+    font-weight: 600;
+    transition: opacity 0.3s, transform 0.2s;
+}
+
+.btn-primary:hover {
+    opacity: 0.9;
+    transform: scale(1.02);
+}
+
+.blur-ip {
+    filter: blur(6px);
+    transition: filter 0.3s ease;
+    cursor: pointer;
+}
+
+.blur-ip:hover {
+    filter: blur(0px);
+}
+
+.glass-dropdown {
+    background: var(--dropdown-bg);
+    backdrop-filter: blur(12px);
+    border: var(--glass-border);
+    box-shadow: var(--glass-shadow);
+    transition: background 0.5s ease;
+}
+
+.dropdown-item {
+    color: var(--text-primary);
+    transition: background 0.2s ease, color 0.2s ease;
+}
+
+.dropdown-item:hover {
+    background: rgba(14, 165, 233, 0.15);
+    color: var(--accent-primary);
+}
+
+.dropdown-header {
+    color: var(--text-secondary);
+    text-transform: uppercase;
+    font-size: 0.75rem;
+    letter-spacing: 1px;
+}
+
+/* Dashboard Specifics */
+.metric-value {
+    font-size: 2.5rem;
+    font-weight: 700;
+    font-family: 'Rajdhani', sans-serif;
+    background: -webkit-linear-gradient(45deg, var(--text-primary), var(--accent-primary));
+    -webkit-background-clip: text;
+    -webkit-text-fill-color: transparent;
+    transition: all 0.5s ease;
+}
+
+.progress {
+    background-color: rgba(128, 128, 128, 0.15);
+    border-radius: 10px;
+    overflow: hidden;
+}
+
+.progress-bar {
+    background: linear-gradient(90deg, var(--accent-primary), var(--accent-secondary));
+    transition: width 0.6s ease;
+}
+
+/* Table overrides for light mode */
+.table {
+    color: var(--text-primary) !important;
+    --bs-table-color: var(--text-primary);
+    --bs-table-bg: transparent;
+    --bs-table-border-color: var(--glass-border);
+}
+
+.table-hover > tbody > tr:hover > * {
+    color: var(--text-primary);
+    background-color: rgba(14, 165, 233, 0.05);
+}
+
+/* Login/Register Page */
+.auth-card {
+    margin-top: 3rem;
+    max-width: 450px;
+}
+
+.user-badge {
+    background: rgba(255, 255, 255, 0.05);
+    padding: 5px 15px;
+    border-radius: 20px;
+    border: 1px solid var(--glass-border);
+    color: var(--text-primary);
+    transition: all 0.3s ease;
+}
+
+.user-badge:hover {
+    background: rgba(255, 255, 255, 0.15);
+    color: var(--text-primary);
+}
+
+/* Toast Customization */
+.toast {
+    background-color: var(--bg-card);
+    color: var(--text-primary);
+    border: var(--glass-border);
+}
+
+.toast .btn-close {
+    filter: invert(1) grayscale(100%) brightness(200%);
+}
+[data-bs-theme="light"] .toast .btn-close {
+    filter: none;
+}
+
+.glass-badge {
+    background: rgba(15, 23, 42, 0.6);
+    border: 1px solid var(--glass-border);
+    color: var(--text-primary);
+    padding: 0.5em 0.75em;
+    border-radius: 6px;
+}
+
+[data-bs-theme="light"] .glass-badge {
+    background: rgba(255, 255, 255, 0.6);
+    border-color: rgba(0, 0, 0, 0.1);
+}
+
+.text-muted {
+    color: var(--text-secondary) !important;
+}
