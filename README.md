@@ -1,4 +1,10 @@
-# Net Dashboard 🌐
+<div align="center">
+  <img src="https://raw.githubusercontent.com/FortAwesome/Font-Awesome/6.x/svgs/solid/network-wired.svg" width="120" alt="NetDashboard Logo">
+  <h1 style="margin-top: 20px;">Net Dashboard</h1>
+  <p>
+    <b>Monitoreo de Red y Sistema en Tiempo Real</b>
+  </p>
+</div>
 
 Un dashboard profesional y moderno para el monitoreo de métricas de red y sistema en tiempo real. Diseñado para entornos internos, este proyecto combina una estética "Glassmorphism" con potentes capacidades de monitoreo, gestión de usuarios y alertas multicanal.
 
@@ -40,7 +46,7 @@ Notificaciones inmediatas sobre anomalías (alto uso de recursos) o caída de se
 
 1.  **Clonar el repositorio**
     ```bash
-    git clone https://github.com/tu-usuario/Net_dashboard.git
+    git clone https://github.com/sharkstar03/Net_dashboard.git
     cd Net_dashboard
     ```
 
@@ -98,4 +104,4 @@ Una vez iniciada la sesión, dirígete al apartado de **Configuración** (ícono
 Este proyecto fue desarrollado para **Quantium Crew** como una herramienta de gestión y monitoreo de entornos internos, demostrando capacidades de desarrollo Full Stack con Python.
 
 ---
-© 2026 Quantium Crew - Desarrollado por D4rk
+© 2026 Quantium Crew - Desarrollado por sharkstar03
